@@ -1,0 +1,18 @@
+#可使用EL表达式进行数据的获取，多样化赋值
+person:
+  name: xiehongfei${random.uuid}
+  age: ${random.int}
+  happy: true
+  birth: 2020/12/06
+  maps: {k1: v1,k2: v2}
+  hello: newBee
+  lists:
+    - l1
+    - l2
+    - l3
+  dog:
+    name: ${person.hello:hello}_旺财
+    age: 3
+
+server:
+  port: 8080
