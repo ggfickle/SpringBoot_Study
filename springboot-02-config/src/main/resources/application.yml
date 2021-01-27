@@ -11,8 +11,17 @@ person:
     - l2
     - l3
   dog:
-    name: ${person.hello:hello}_旺财
+    name: ${person.hello:ganma}_旺财
     age: 3
 
 server:
   port: 8080
+
+gcsoft:
+  name: zhangsan
+  age: 19
+  date: 2021/01/27
+
+boot-configuration-properties:
+  name: zhansgan
+  age: 12
