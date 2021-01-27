@@ -1,18 +1,21 @@
+#多环境配置
 server:
   port: 8080
 
 spring:
   profiles:
-    active: test
+    active: dev  #激活哪个环境    要写在顶部才会生效
 ---
+#test环境
 server:
   port: 8082
 
 spring:
-  profiles: test
+  profiles: test  #环境名称
 ---
+#dev环境
 server:
   port: 8081
 
 spring:
-  profiles: dev
+  profiles: dev  #环境名称
