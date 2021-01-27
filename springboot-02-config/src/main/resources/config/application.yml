@@ -1,0 +1,27 @@
+#可使用EL表达式进行数据的获取，多样化赋值
+person:
+  name: xiehongfei${random.uuid}
+  age: ${random.int}
+  happy: true
+  birth: 2020/12/06
+  maps: {k1: v1,k2: v2}
+  hello: newBee
+  lists:
+    - l1
+    - l2
+    - l3
+  dog:
+    name: ${person.hello:ganma}_旺财
+    age: 3
+
+server:
+  port: 8083
+
+gcsoft:
+  name: zhangsan
+  age: 19
+  date: 2021/01/27
+
+boot-configuration-properties:
+  name: zhansgan
+  age: 12
