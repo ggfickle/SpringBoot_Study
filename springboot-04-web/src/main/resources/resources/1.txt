@@ -1,6 +1,0 @@
-hello3
-
-springboot处理静态资源可以使用：
-     resources  static public
-
-其中优先级： resources > static(默认) > public

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--不转义和转义-->
+<div th:text="${msg}"></div>
+<div th:utext="${msg}"></div>
+<hr>
+<!--循环遍历元素-->
+<h2>TestDemo</h2>
+<div th:each="user:${users}" th:utext="${user}"></div>
+</body>
+</html>
