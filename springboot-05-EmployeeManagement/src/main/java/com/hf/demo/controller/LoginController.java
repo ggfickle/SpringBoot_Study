@@ -6,6 +6,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * @program: springboot-05-EmployeeManagement
  * @description: login
@@ -17,8 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class LoginController {
 
     @PostMapping("/login")
-    public String login(@RequestParam("username") String username, @RequestParam("password") String password, Model model) {
+    public String login(@RequestParam("username") String username, @RequestParam("password") String password, Model model, HttpSession session) {
         if (!StringUtils.isEmpty("username") && password.equals("123")) {
+            session.setAttribute("userSession", "xieHongFei");
             return "redirect:main.html";
         } else {
             model.addAttribute("msg", "用户名或者密码错误！");
