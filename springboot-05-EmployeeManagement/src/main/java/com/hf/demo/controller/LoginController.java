@@ -21,7 +21,7 @@ public class LoginController {
     @PostMapping("/login")
     public String login(@RequestParam("username") String username, @RequestParam("password") String password, Model model, HttpSession session) {
         if (!StringUtils.isEmpty("username") && password.equals("123")) {
-            session.setAttribute("userSession", "xieHongFei");
+            session.setAttribute("userSession", username);
             return "redirect:main.html";
         } else {
             model.addAttribute("msg", "用户名或者密码错误！");
