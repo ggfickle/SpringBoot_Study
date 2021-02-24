@@ -19,11 +19,9 @@ public class EmployeeController {
     private EmploeeDao emploeeDao;
 
     @RequestMapping("/emps")
-    @ResponseBody
     public String getEmployeeList(Model model) {
         Collection<Employee> allEmployeeInfo = emploeeDao.getAllEmployeeInfo();
         model.addAttribute("emps", allEmployeeInfo);
-//        return "emps/list";
-        return JSON.toJSONString(allEmployeeInfo);
+        return "emps/list";
     }
 }
