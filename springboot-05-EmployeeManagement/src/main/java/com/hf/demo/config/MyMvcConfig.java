@@ -7,6 +7,9 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @program: springboot-05-EmployeeManagement
  * @description: My MVC Config
@@ -21,9 +24,8 @@ public class MyMvcConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/index").setViewName("index");
-        registry.addViewController("/dashboard").setViewName("dashboard");
         registry.addViewController("/notfound").setViewName("notFound");
-        registry.addViewController("/main.html").setViewName("emps/list");
+        registry.addViewController("/main.html").setViewName("dashboard");
     }
 
     //自定义的国际化组件就生效了
@@ -35,6 +37,14 @@ public class MyMvcConfig implements WebMvcConfigurer {
     //自定义拦截器
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**").excludePathPatterns( "/index", "/dashboard", "/", "/login", "/emps", "/css/*", "/img/*", "/js/*");
+        List<String> excludePaths = new ArrayList<>();
+        excludePaths.add("/logout");
+        excludePaths.add("/index");
+        excludePaths.add("/");
+        excludePaths.add("/login");
+        excludePaths.add("/css/*");
+        excludePaths.add("/img/*");
+        excludePaths.add("/js/*");
+        registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**").excludePathPatterns(excludePaths);
     }
 }
