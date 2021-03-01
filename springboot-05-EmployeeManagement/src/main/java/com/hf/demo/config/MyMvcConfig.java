@@ -45,6 +45,6 @@ public class MyMvcConfig implements WebMvcConfigurer {
         excludePaths.add("/css/*");
         excludePaths.add("/img/*");
         excludePaths.add("/js/*");
-        registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**").excludePathPatterns(excludePaths);
+//        registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**").excludePathPatterns(excludePaths);
     }
 }
