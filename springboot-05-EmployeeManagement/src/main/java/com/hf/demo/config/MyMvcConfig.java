@@ -1,5 +1,6 @@
 package com.hf.demo.config;
 
+import com.hf.demo.component.MyLocalResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.LocaleResolver;

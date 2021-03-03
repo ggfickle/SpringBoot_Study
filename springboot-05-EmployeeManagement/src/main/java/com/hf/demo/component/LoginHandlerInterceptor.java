@@ -1,4 +1,4 @@
-package com.hf.demo.config;
+package com.hf.demo.component;
 
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
