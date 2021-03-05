@@ -1,5 +1,6 @@
 package com.hf.demo.config;
 
+import com.hf.demo.component.LoginHandlerInterceptor;
 import com.hf.demo.component.MyLocalResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -46,6 +47,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
         excludePaths.add("/css/*");
         excludePaths.add("/img/*");
         excludePaths.add("/js/*");
-//        registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**").excludePathPatterns(excludePaths);
+        excludePaths.add("/hello");
+        registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**").excludePathPatterns(excludePaths);
     }
 }
