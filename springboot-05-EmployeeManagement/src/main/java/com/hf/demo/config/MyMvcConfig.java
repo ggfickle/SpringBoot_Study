@@ -1,5 +1,6 @@
 package com.hf.demo.config;
 
+import com.hf.demo.component.LoginHandlerInterceptor;
 import com.hf.demo.component.MyLocalResolver;
 import org.springframework.boot.autoconfigure.web.embedded.EmbeddedWebServerFactoryCustomizerAutoConfiguration;
 import org.springframework.boot.web.server.ConfigurableWebServerFactory;
@@ -50,6 +51,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
         excludePaths.add("/css/*");
         excludePaths.add("/img/*");
         excludePaths.add("/js/*");
-//        registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**").excludePathPatterns(excludePaths);
+        excludePaths.add("/hello");
+        registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**").excludePathPatterns(excludePaths);
     }
 }
