@@ -1,10 +1,12 @@
 package com.hf.demo.config;
 
 import com.hf.demo.servlet.MyFilter;
+import com.hf.demo.servlet.MyListener;
 import com.hf.demo.servlet.MyServlet;
 import org.springframework.boot.web.server.ConfigurableWebServerFactory;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,6 +32,7 @@ public class MyServerConfig {
     @Bean
     public ServletRegistrationBean<MyServlet> myServletRegistrationBean() {
         ServletRegistrationBean<MyServlet> myServletServletRegistrationBean = new ServletRegistrationBean<>(new MyServlet(), "/myServlet");
+        myServletServletRegistrationBean.setLoadOnStartup(1);
         return myServletServletRegistrationBean;
     }
 
@@ -44,6 +47,18 @@ public class MyServerConfig {
         filterRegistrationBean.setFilter(new MyFilter());
         filterRegistrationBean.setUrlPatterns(Arrays.asList("/hello", "/MyServlet", "/hello1"));
         return filterRegistrationBean;
+    }
+
+    /**
+     * 注册监听器
+     *
+     * @return
+     */
+    @Bean
+    public ServletListenerRegistrationBean myServletListenerRegistrationBean() {
+        ServletListenerRegistrationBean servletListenerRegistrationBean = new ServletListenerRegistrationBean();
+        servletListenerRegistrationBean.setListener(new MyListener());
+        return servletListenerRegistrationBean;
     }
 
     /**
