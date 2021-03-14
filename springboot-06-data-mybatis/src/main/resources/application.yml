@@ -1,0 +1,3 @@
+spring:
+  datasource:
+    url: jdbc:mysql://8.136.41.79:3306/
