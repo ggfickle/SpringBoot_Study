@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hf.mapper.BookMapper">
+    <select id="getAllBook" resultType="com.hf.pojo.Book">
+        select * from book;
+    </select>
+    <select id="getBook" resultType="com.hf.pojo.Book" parameterType="java.lang.String">
+        select * from book where book_name=#{0};
+    </select>
+    <insert id="insertBook">
+        insert into book(book_name,book_price) values (#{bookName},#{bookPrice});
+    </insert>
+</mapper>
