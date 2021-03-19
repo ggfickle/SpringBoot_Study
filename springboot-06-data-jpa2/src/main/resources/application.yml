@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://8.136.41.79:3306/jpa?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true
+    #务必加上下面这句话，很重要！！  ！！不然数据库文件无法运行
+    initialization-mode: always
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      #更新或者创建数据表结构
+      ddl-auto: update
+    #控制台显示sql
+    show-sql: true
+  main:
+    allow-bean-definition-overriding: true
