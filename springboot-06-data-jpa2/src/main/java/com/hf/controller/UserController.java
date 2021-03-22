@@ -24,4 +24,11 @@ public class UserController {
         User user = userRepository.findById(id).get();
         return user;
     }
+
+    @GetMapping("/update")
+    public User updateUser(User user){
+        User update = userRepository.save(user);
+
+        return update;
+    }
 }
