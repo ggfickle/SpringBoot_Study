@@ -6,7 +6,7 @@ import com.hf.service.EmployeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.*;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
  * @author: xiehongfei
  * @create: 2021-03-23 20:55
  **/
+@CacheConfig(cacheNames = "emp") //抽取缓存的公共配置
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
@@ -40,8 +41,9 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @param employeeId
      * @return
      */
+    //    @Cacheable(value = "emp", keyGenerator = "myKeyGenerator", condition = "#employeeId>0 and #root.methodName eq 'aaa'")
 //    @Cacheable(cacheNames = "emp", key = "#root.methodName+'['+#employeeId+']'")
-    @Cacheable(value = "emp", keyGenerator = "myKeyGenerator",condition = "#employeeId>0 and #root.methodName eq 'aaa'")
+    @Cacheable(/*value = "emp",*/ key = "#employeeId")
     @Override
     public Employee getEmployeeById(Integer employeeId) {
         logger.trace("------------------------getEmployeeById--------------------------");
@@ -50,21 +52,64 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employee;
     }
 
+    /**
+     * @param employee
+     * @return
+     * @CachePut即调用方法，又更新缓存数据 修改了数据库的某个数据，同时又更新缓存
+     * 运行时机：
+     * 1、先调用方法
+     * 2、将目标方法的结果缓存起来
+     * <p>
+     * 注：记得要与查询缓存的key保持一致，，否则导致更新后查询还是原来的结果
+     */
+    @CachePut(/*value = "emp",*/ key = "#employee.employeeId")
     @Override
-    public void updateEmployee(Employee employee) {
+    public Employee updateEmployee(Employee employee) {
+        System.out.println("updateEmp:" + employee.getEmployeeId());
         logger.trace("updateEmployee..");
         employeeMapper.updateEmployee(employee);
+        return employee;
     }
 
+    /**
+     * @param id
+     * @return
+     * @CacheEvict缓存清除 key：指定要清除的数据的key
+     * allEntries = true:指定清除缓存中所有的数据
+     * beforeInvocation = false:缓存的清除是否在方法执行之前,默认是在方法执行之后执行，如果出现异常的话缓存就不会清除
+     * beforeInvocation = true：代表清除缓存操作是在方法执行之前，无论方法是否出现异常，缓存都会清除
+     */
+    @CacheEvict(/*value = "emp",*/ key = "#id")
     @Override
-    public void deleteEmp(Integer id) {
+    public Integer deleteEmp(Integer id) {
         logger.trace("deleteEmp..");
-        employeeMapper.deleteEmp(id);
+        System.out.println("deleteEmp..");
+        return employeeMapper.deleteEmp(id);
     }
 
     @Override
-    public void insertEmp(Employee employee) {
+    public Integer insertEmp(Employee employee) {
         logger.trace("insertEmp..");
-        employeeMapper.insertEmp(employee);
+        return employeeMapper.insertEmp(employee);
+    }
+
+    /**
+     * @CachePut注解下的方法体一定会执行的
+     * @param empName
+     * @return
+     */
+    @Caching(
+            cacheable = {
+                    @Cacheable(/*value = "emp",*/ key = "#empName")
+            },
+            put = {
+                    @CachePut(/*value = "emp",*/ key = "#result.employeeId"),
+                    @CachePut(/*value = "emp",*/ key = "#result.employeeEmail")
+            }
+    )
+    @Override
+    public Employee getEmpByName(String empName) {
+        System.out.println("getEmpByName:" + empName);
+        return employeeMapper.getEmpByName(empName);
     }
 }

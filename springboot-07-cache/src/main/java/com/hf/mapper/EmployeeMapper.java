@@ -3,6 +3,8 @@ package com.hf.mapper;
 import com.hf.pojo.Employee;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 /**
  * @program: springboot-07-cache
  * @description:
@@ -16,11 +18,15 @@ public interface EmployeeMapper {
     public Employee getEmployeeById(Integer employeeId);
 
     @Update("update employee set employee_name=#{employeeName},employee_email=#{employeeEmail},employee_gender=#{employeeGender},d_id=#{dId} where employee_id=#{employeeId}")
-    public void updateEmployee(Employee employee);
+    public Integer updateEmployee(Employee employee);
 
-    @Delete("delete from employee where employeeId=#{id}")
-    public void deleteEmp(Integer id);
+    @Delete("delete from employee where employee_id=#{id}")
+    public Integer deleteEmp(Integer id);
 
     @Insert("insert into employee values(default,#{employeeName},#{employeeEmail},#{employeeGender},#{dId})")
-    public void insertEmp(Employee employee);
+    public Integer insertEmp(Employee employee);
+
+    @Select("select * from employee where employee_name=#{empName}")
+    public Employee getEmpByName(String empName);
+
 }
