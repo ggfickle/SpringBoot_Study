@@ -9,7 +9,7 @@ import org.springframework.cache.annotation.EnableCaching;
 //@MapperScan指定需要扫描的mapper接口所在的包
 @MapperScan("com.hf.mapper")
 @SpringBootApplication
-@EnableCaching
+@EnableCaching   //开启基于注解的缓存
 public class Springboot07CacheApplication {
 
     public static void main(String[] args) {

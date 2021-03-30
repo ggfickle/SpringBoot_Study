@@ -28,7 +28,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      * cacheManage管理多个cache组件的，对缓存真正的crud操作在cache组件中，每一个缓存组件有一个自己唯一的名字
      * 几个属性：
      * cacheNames/value ：指定缓存组件的名字
-     * key:缓存数据的key：可以用它来指定，默认使用参数的值  key = "#employeeId"
+     * key:缓存数据的key：可以用它来指定，默认使用参数的值  key = "#employeeId"  可以编写spel表达式进行取值拼接
      * #employeeId;参数employeeId的值，等同于#a0  #p0   #root.args[0]
      * keyGenerator:key的生成器；可以自己指定key的生成器的组件id
      * key/keyGenerator ：二选一使用
@@ -36,10 +36,12 @@ public class EmployeeServiceImpl implements EmployeeService {
      * condition：指定符合条件的情况下才缓存
      * unless：否定缓存   ；当unless指定的条件为true，方法的返回值就不会被缓存，与condition相反；可以获取到结果进行判断  unless = "#result==null"
      * sync:是否使用异步模式
+     *
      * @param employeeId
      * @return
      */
-    @Cacheable(cacheNames = "emp")
+//    @Cacheable(cacheNames = "emp", key = "#root.methodName+'['+#employeeId+']'")
+    @Cacheable(value = "emp", keyGenerator = "myKeyGenerator",condition = "#employeeId>0 and #root.methodName eq 'aaa'")
     @Override
     public Employee getEmployeeById(Integer employeeId) {
         logger.trace("------------------------getEmployeeById--------------------------");
