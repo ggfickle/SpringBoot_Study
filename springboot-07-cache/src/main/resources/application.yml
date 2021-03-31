@@ -39,6 +39,8 @@ spring:
       - classpath:sql/createEmployee.sql
       - classpath:sql/insertDepartment.sql
       - classpath:sql/insertEmployee.sql
+  redis:
+    host: 8.136.41.79
 
 #设置mybatis的驼峰命名法
 mybatis:
@@ -54,4 +56,5 @@ logging:
     console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{50} - %msg%n"
     file: "%d{yyyy-MM-dd HH:mm:ss} === [%thread] === %-5level === %logger{50} ==== %msg%n"
 
-debug: true
+#debug: true
+
