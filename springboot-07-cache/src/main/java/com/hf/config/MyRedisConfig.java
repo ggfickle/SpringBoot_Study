@@ -22,6 +22,7 @@ public class MyRedisConfig {
         template.setConnectionFactory(redisConnectionFactory);
         Jackson2JsonRedisSerializer<Department> employeeJackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Department.class);
 //        template.setDefaultSerializer(employeeJackson2JsonRedisSerializer);
+        //解决添加key的时候有双引号的问题
         template.setKeySerializer(new StringRedisSerializer());
         template.setKeySerializer(new StringRedisSerializer());
         template.setHashKeySerializer(new StringRedisSerializer());
