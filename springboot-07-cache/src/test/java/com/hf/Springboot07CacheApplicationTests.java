@@ -19,7 +19,7 @@ class Springboot07CacheApplicationTests {
     private RedisTemplate redisTemplate;
 
     @Autowired
-    private RedisTemplate<Object, Department> empRedisTemplate;
+    private RedisTemplate<Object, Object> empRedisTemplate;
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;

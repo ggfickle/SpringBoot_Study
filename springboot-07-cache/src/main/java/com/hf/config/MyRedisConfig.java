@@ -17,10 +17,10 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @Configuration
 public class MyRedisConfig {
     @Bean
-    public RedisTemplate<Object, Department> empRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
-        RedisTemplate<Object, Department> template = new RedisTemplate();
+    public RedisTemplate<Object, Object> empRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
+        RedisTemplate<Object, Object> template = new RedisTemplate();
         template.setConnectionFactory(redisConnectionFactory);
-        Jackson2JsonRedisSerializer<Department> employeeJackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Department.class);
+        Jackson2JsonRedisSerializer<Object> employeeJackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
 //        template.setDefaultSerializer(employeeJackson2JsonRedisSerializer);
         //解决添加key的时候有双引号的问题
         template.setKeySerializer(new StringRedisSerializer());
