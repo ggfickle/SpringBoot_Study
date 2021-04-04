@@ -50,12 +50,6 @@ mybatis:
   #不可与上面的驼峰命名法一起写
 #  config-location: classpath:mybatis/mybatis-config.xml
 #  mapper-locations: classpath:mybatis/mapper/*.xml
-logging:
-  level:
-    com.hf.mapper: debug
-  pattern:
-    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{50} - %msg%n"
-    file: "%d{yyyy-MM-dd HH:mm:ss} === [%thread] === %-5level === %logger{50} ==== %msg%n"
 
 #debug: true
 

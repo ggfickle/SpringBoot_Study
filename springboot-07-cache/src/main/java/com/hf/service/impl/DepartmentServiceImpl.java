@@ -3,10 +3,13 @@ package com.hf.service.impl;
 import com.hf.mapper.DepartmentMapper;
 import com.hf.pojo.Department;
 import com.hf.service.DepartmentService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 
 /**
  * @program: springboot-07-cache
@@ -14,24 +17,23 @@ import org.springframework.stereotype.Service;
  * @author: xiehongfei
  * @create: 2021-03-23 20:55
  **/
-@Service
-public class DepartmentServiceImpl implements DepartmentService {
 
-    private Logger logger = LoggerFactory.getLogger(getClass());
+@Service
+@CacheConfig(cacheNames = "dept",cacheManager = "myCacheManager")
+public class DepartmentServiceImpl implements DepartmentService {
 
     @Autowired
     private DepartmentMapper departmentMapper;
 
+    @Cacheable(key = "#departmentId")
     @Override
     public Department getDepartmentById(Integer departmentId) {
-        logger.debug("getDepartmentById。。。");
         System.out.println("getDepartmentById。。。。");
         return departmentMapper.getDepartmentById(departmentId);
     }
 
     @Override
     public void insertDept(Department department) {
-        logger.trace("insertDept。。。");
         departmentMapper.insertDept(department);
     }
 }

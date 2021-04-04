@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 /**
  * @program: springboot-07-cache
  * @description:
@@ -23,11 +21,9 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    private Logger logger = LoggerFactory.getLogger(getClass());
 
     @GetMapping("/emp/{employeeId}")
     public Employee getEmployeeById(@PathVariable("employeeId") Integer employeeId) {
-        logger.debug("-----getEmployeeById------");
         Employee employee = employeeService.getEmployeeById(employeeId);
         return employee;
     }

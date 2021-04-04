@@ -15,14 +15,12 @@ import org.springframework.stereotype.Service;
  * @author: xiehongfei
  * @create: 2021-03-23 20:55
  **/
-@CacheConfig(cacheNames = "emp") //抽取缓存的公共配置
+@CacheConfig(cacheNames = "emp",cacheManager ="myCacheManager") //抽取缓存的公共配置
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
     private EmployeeMapper employeeMapper;
-
-    private Logger logger = LoggerFactory.getLogger(getClass());
 
     /**
      * Cacheable 将方法的结果进行缓存；以后再要相同的数据直接从缓存中获取，不用调用方法
@@ -46,7 +44,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Cacheable(/*value = "emp",*/ key = "#employeeId")
     @Override
     public Employee getEmployeeById(Integer employeeId) {
-        logger.trace("------------------------getEmployeeById--------------------------");
         System.out.println("查询了" + employeeId + "号员工");
         Employee employee = employeeMapper.getEmployeeById(employeeId);
         return employee;
@@ -66,7 +63,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee updateEmployee(Employee employee) {
         System.out.println("updateEmp:" + employee.getEmployeeId());
-        logger.trace("updateEmployee..");
         employeeMapper.updateEmployee(employee);
         return employee;
     }
@@ -82,14 +78,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     @CacheEvict(/*value = "emp",*/ key = "#id")
     @Override
     public Integer deleteEmp(Integer id) {
-        logger.trace("deleteEmp..");
         System.out.println("deleteEmp..");
         return employeeMapper.deleteEmp(id);
     }
 
     @Override
     public Integer insertEmp(Employee employee) {
-        logger.trace("insertEmp..");
         return employeeMapper.insertEmp(employee);
     }
 
