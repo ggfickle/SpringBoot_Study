@@ -1,0 +1,12 @@
+spring:
+  elasticsearch:
+    rest:
+      uris: http://8.136.41.79:9200
+      username: elastic
+      password: 123456
+
+server:
+  servlet:
+    context-path: /ems
+
+spring.data.el
