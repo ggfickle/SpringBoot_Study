@@ -21,9 +21,9 @@ public class BookService {
     }
 
     @RabbitListener(queues = "xhf.news")
-    public void receiveMsg(Message messgae) {
-        System.out.println(messgae.getBody());
-        System.out.println(messgae.getMessageProperties());
-        System.out.println(messgae.getClass());
+    public void receiveMsg(Message message) {
+        System.out.println(message.getBody());
+        System.out.println(message.getMessageProperties());
+        System.out.println(message.getClass());
     }
 }
