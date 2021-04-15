@@ -1,0 +1,7 @@
+dubbo:
+  application:
+    name: provider-ticket
+  registry:
+    address: zookeeper://8.136.41.79:2181
+  scan:
+    base-packages: com.hf.ticket.service

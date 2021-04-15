@@ -1,0 +1,7 @@
+dubbo:
+  application:
+    name: consumer-user
+  registry:
+    address: zookeeper://8.136.41.79:2181
+server:
+  port: 8081
