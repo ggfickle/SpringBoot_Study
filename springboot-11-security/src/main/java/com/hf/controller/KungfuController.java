@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  **/
 @Controller
 public class KungfuController {
-
-    private final static String PREFIX = "pages/";
+    private final String PREFIX = "pages/";
 
     /**
      * 欢迎页
@@ -25,14 +24,15 @@ public class KungfuController {
     }
 
     /**
-     * 登录页
+     * 登陆页
      *
      * @return
      */
-    @GetMapping("/userLogin")
+    @GetMapping("/userlogin")
     public String loginPage() {
         return PREFIX + "login";
     }
+
 
     /**
      * level1页面映射
