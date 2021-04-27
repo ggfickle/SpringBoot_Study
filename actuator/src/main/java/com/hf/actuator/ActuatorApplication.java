@@ -1,13 +1,13 @@
-package com.hf.user;
+package com.hf.actuator;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ConsumerUserApplication {
+public class ActuatorApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ConsumerUserApplication.class, args);
+        SpringApplication.run(ActuatorApplication.class, args);
     }
 
 }

@@ -34,13 +34,12 @@ public class MyRedisConfig {
     public RedisTemplate<Object, Object> empRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
         RedisTemplate<Object, Object> template = new RedisTemplate();
         template.setConnectionFactory(redisConnectionFactory);
-        Jackson2JsonRedisSerializer<Object> employeeJackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
+        Jackson2JsonRedisSerializer<Object> ObjectJackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
 //        template.setDefaultSerializer(employeeJackson2JsonRedisSerializer);
         //解决添加key的时候有双引号的问题
         template.setKeySerializer(new StringRedisSerializer());
-        template.setKeySerializer(new StringRedisSerializer());
         template.setHashKeySerializer(new StringRedisSerializer());
-        template.setHashValueSerializer(employeeJackson2JsonRedisSerializer);
+        template.setHashValueSerializer(ObjectJackson2JsonRedisSerializer);
         template.afterPropertiesSet();
         return template;
     }
