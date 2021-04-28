@@ -1,6 +1,14 @@
 spring:
   rabbitmq:
     host: 8.136.41.79
-    username: guest
-    password: guest
+    username: ems
+    password: 123
     port: 5672
+    listener:
+      simple:
+        #prefetch每次一次性从broker里面取的待消费的消息的个数
+        prefetch: 1
+        #创建消费者的个数（并发消费）
+        concurrency: 5
+        max-concurrency: 10
+    virtual-host: "/ems"

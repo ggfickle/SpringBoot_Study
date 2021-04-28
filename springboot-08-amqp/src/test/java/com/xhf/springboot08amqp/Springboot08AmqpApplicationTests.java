@@ -1,6 +1,7 @@
 package com.xhf.springboot08amqp;
 
 import com.xhf.springboot08amqp.bean.Book;
+import com.xhf.springboot08amqp.compent.HelloSender;
 import org.junit.jupiter.api.Test;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -19,6 +20,22 @@ class Springboot08AmqpApplicationTests {
 
     @Autowired
     AmqpAdmin amqpAdmin;
+
+    @Autowired
+    private HelloSender helloSender;
+
+    @Test
+    public void sendMessage() {
+        helloSender.send("hello","你好，我需要发送向队列发送消息1...");
+    }
+
+    @Test
+    public void sendManyMessage(){
+        for (int i=0;i<5;i++){
+            helloSender.send("hello","你好，我要向队列发送消息1..."+i);
+            helloSender.send("hello","你好，我要向队列发送消息2..."+i);
+        }
+    }
 
     /**
      * 单播（点对点）
